@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main{
+            display: flex;
+            justify-content: space-around;
+        }
+        .first{
+            width: 800px;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .second{
+            width: 800px;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        form div{
+            display: flex;
+            justify-content: space-between;
+            width: 300px;
+            margin: 5px 0px;
+        }
+        form button{
+            width: 90px;
+            height: 30px;
+            box-shadow: -3px -3px 1px black;
+            background-color: aqua;
+        }
+        h2{margin-left: 22%;}
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="first">
+            <form action="/register" method="post">
+                <h2>Register</h2>
+                {% csrf_token %}
+                <div>
+                    <p>first name:</p>
+                    <input type="text" name="first_name">
+                </div>
+                <div>
+                    <p>last_name:</p>
+                    <input type="text" name="last_name">
+                </div>
+                <div>
+                    <p>email:</p>
+                    <input type="email" name="email">
+                </div>
+                <div>
+                    <p>password: </p>
+                    <input type="password" name="password">
+                </div>
+                <div>
+                    <p>confirm_password: </p>
+                    <input type="password" name="confirm_pw">
+                </div>
+                <button type="submit">register</button>
+            </form>
+            {% if request.session.flag == 'register'%}
+                {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %}    
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="second">
+            <form action="/login" method="post">
+                <h2>login</h2>
+                {% csrf_token %}
+                <div>
+                    <p>email</p>
+                    <input type="email" name="email">
+                </div>
+                <div>
+                    <p>password</p>
+                    <input type="password" name="password">
+                </div>
+                <button type="submit">login</button>
+            </form>
+            {% if request.session.flag == 'login'%}
+                {% if messages %}
+                    <ul class="messages">    
+                        {% for message in messages %} 
+                            <li {% if message.tags %} class="{{ message }}"{% endif %}>{{ message }}</li>    
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endif %}
+        </div>
+</div>
+</body>
+</html>
