@@ -1,0 +1,17 @@
+.flex{
+    display: flex;
+    justify-content: space-evenly;
+}
+.card-body{
+    margin-left: 20%;
+}
+.comment{
+    display: flex;
+    justify-content: center;
+}
+textarea{
+    border-radius: 5px;
+}
+button{
+    background-color: #ffc107;
+}

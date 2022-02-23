@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movies Home</title>
+    <link rel="stylesheet" href="static/login_reg.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/watch_list.css">
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid" >
+            <div class="row  head align-items-center justify-content-center px-5 py-2">
+                <div class="col-2">
+                    <img src="C:\Users\lenovo\OneDrive\Desktop\python project\movie_library\movie_proj\static\img\project_logo1.png" alt="Movies House" height="50px" >
+                </div>
+                <div class="col-1">
+                    <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Home</a>
+                </div>
+                <div class="col-1">
+                    <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">About us</a>
+                </div>
+                <div class="col-6">
+                    <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Contact us</a>
+                </div>
+                <div class="col-1">
+                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">Login</a>
+                </div>
+                <div class="col-1">
+                    <a href="#" class="btn btn-warning btn-sm" style="font-size:16px;">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <div class="container-fluid">
+            <div class="row  head align-items-center justify-content-center px-5 py-2 ">
+                <div class="col-1">
+                    <a href="#" style="color: black; font-size:18px;">Movies</a>
+                </div>
+                <div class="col-1">
+                    <a href="#" style="color: black; font-size:18px;">TV Shows</a>
+                </div>
+                <div class="col-1 watch">
+                    <a href="#" style="color: black; font-size:18px;">Watch List</a>
+                </div>
+                <div class="col-1">
+                    <a href="#"  style="color: black; font-size:18px;">Favorites</a>
+                </div>
+                <div class="nav-item dropdown col-1">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"   data-bs-toggle="dropdown" style="color: black;font-size:16px">
+                        categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Drama</a></li>
+                        <li><a class="dropdown-item" href="#">Comedy</a></li>
+                        <li><a class="dropdown-item" href="#">Thriller</a></li>
+                        <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                    </ul>
+                </div>
+                <div class="col-3"></div>
+                    <form class="d-flex col-3">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-warning btn-sm" type="submit" style="color:black;">Search</button>
+                    </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid  mainbody">
+        <div class="row align-items-center justify-content-start ">
+            <div class="card col-3 bg-gardient mx-3" style="height: 450px;">
+                <img  src="https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg"class="card-img-top" alt="movie_cover">
+                <div class="card-body">
+                    <h5 class="card-title">Movie Name</h5>
+                    <p class="card-text">Movie Description</p>
+                    <a href="#" class="btn btn-warning">Details</a>
+                    <a href="#" class="btn btn-warning">Remove from Watch List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
