@@ -1,70 +1,54 @@
 from django.db import models
 import re
 
-class BlogManager(models.Manager):
+class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
-        # add keys and values to errors dictionary for each invalid field
+    #First name and last name validations
         if len(postData['first_name']) < 2:
-            errors["first_name"] = "Blog first_name should be at least 2 characters"
+            errors["first_name"] = "First name should be at least 2 characters"
         if len(postData['last_name']) < 2:
-            errors["last_name"] = "Blog last_name should be at least 2 characters"
+            errors["last_name"] = "Last name should be at least 2 characters"
+    #Email validations
+        user = User.objects.filter(email = postData['email'])
+        if user:
+            errors['email'] = "Email already exists"
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if not EMAIL_REGEX.match(postData['email']):    # test whether a field matches the pattern            
+        if not EMAIL_REGEX.match(postData['email']):            
             errors['email'] = "Invalid email address!"
-        if len(postData['email']) < 8:
-            errors["email1"] = "Blog email should be at least 8 characters"
-        if len(postData['password']) < 8:
-            errors["password"] = "Blog password should be at least 8 characters"
-        if len(postData['confirm_pw']) < 8:
-            errors["confirm_pw"] = "Blog confirm_pw should be at least 8 characters"
-        if (postData['confirm_pw'] != postData['password']):
-            errors["confirm_pw1"] = "Blog not maching characters"
-        # if (datetime.date(postData['releas']) < datetime.date(datetime.now())):
-        #     errors["releas"] =" title should be at least 10 characters time shoud be no in the future"
+    # Password validations
+        if len(postData['password']) == 0:
+            errors["password"] = "Password is required!"
+        elif len(postData['password']) < 8:
+            errors["password"] = "Password should be at least 8 characters"
+        if postData['confirm_pw'] != postData['password']:
+            errors['confirm_pw'] = "password doesn't match the confirmed PW"
+        
         return errors
-    
-    def wish_validator(self , postData):
+        
+    def login_val(self,postData):
         errors = {}
-        if len(postData['item']) < 3:
-            errors["first_name"] = "Blog item should be at least 3 characters"
-        if len(postData['desc']) < 3:
-            errors["last_name"] = "Blog desc should be at least 3 characters"
+        EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
+        if not EMAIL_REGEX.match(postData['email']):            
+            errors['email'] = "Invalid email address!"
+        
+        if len(postData['password']) == 0:
+            errors["password"] = "Password is required!"
+        
+        
+        
         return errors
 
-    def edit_validator(self , postData):
-        errors = {}
-        if len(postData['item']) < 3:
-            errors["first_name"] = "Blog item should be at least 3 characters"
-        if len(postData['desc']) < 3:
-            errors["last_name"] = "Blog desc should be at least 3 characters"
-        return errors
 
-    def check_login(self):
-        errors = {}
-        errors["email"] = "youre email or password not correct"
-        return errors
-
-class Login(models.Model):
+class User(models.Model):
     first_name = models.CharField(max_length=45)
     last_name = models.CharField(max_length=45)
-    email = models.CharField(max_length=45)
-    password = models.CharField(max_length=45)
-    confirm_pw = models.CharField(max_length=45)
+    email = models.CharField(max_length=255)
+    password = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    objects = BlogManager()
-
-
-class Whish(models.Model):
-    item = models.CharField(max_length=255)
-    desc = models.TextField(default='')
-    uploded_by = models.ForeignKey(Login, related_name="books_uploded", on_delete = models.CASCADE)
-    users_who_likes = models.ManyToManyField(Login,related_name='liked_books')
-    granted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-
-
+    objects = UserManager()
+    
+    # liked_books = a list of books a given user likes
+    # books_uploaded = a list of books uploaded by a given user
 
