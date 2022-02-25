@@ -29,7 +29,7 @@ def register(request):
             password = pw_hash,
         )
         request.session['userid'] = user.id
-        return redirect("/books")
+        return redirect("/main_page")
     else:
         return redirect("/")
 
@@ -49,7 +49,7 @@ def login(request):
         logged_user = user[0]
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['userid'] = logged_user.id
-            return redirect("/books")
+            return redirect("/main_page")
         else:
             messages.error(request, "invalid email or password")
     else:

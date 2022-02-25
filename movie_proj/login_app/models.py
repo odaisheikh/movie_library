@@ -1,6 +1,7 @@
 from django.db import models
 import re
 
+
 class UserManager(models.Manager):
     def basic_validator(self, postData):
         errors = {}
@@ -48,7 +49,11 @@ class User(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = UserManager()
-    
-    # liked_books = a list of books a given user likes
-    # books_uploaded = a list of books uploaded by a given user
+
+    # favorites = a list of movies a given user likes
+    # added_movies = a list of movies uploaded by a given user
+    # movies_to_watch = a list of movies to be watched by a given user
+    # comments = a list of comments that a given user did on different movies
+
+
 
