@@ -13,6 +13,11 @@ header a{
 .a{
     color: #ffc107;
 }
+/* .main_container{
+    background-color: #212529;
+    background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
+    background-color: #ffc107;
+} */
 .slid_container{
     background-color: #212529;
 }
@@ -36,8 +41,9 @@ header a{
 .sid_bar{
     width: 150px;
     height: 800px;
-    background-color: #ffc107;
+    background-color: #212529;
     flex: 1;
+    background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
 }
 .main_container{
     display: flex;
@@ -46,3 +52,4 @@ header a{
     flex: 4;
     height: 200px;
 }
+
