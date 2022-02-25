@@ -21,7 +21,7 @@ nav a{
 }
 .mainbody{
     height: 1000px;
-    background-image: url("static/css/Beauty_Skincare_Neutral_Website.png");
+    background-image: url("../css/Beauty_Skincare_Neutral_Website.png");
     background-color: gray;
     opacity: 0.9;
     background-repeat: no-repeat;
