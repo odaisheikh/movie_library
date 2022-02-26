@@ -57,21 +57,22 @@
                 <div class="col-1">
                     <a href="/favorite"  style="color: black; font-size:18px;">Favorites</a>
                 </div>
-                <div class="nav-item dropdown col-1">
+                <div class="nav-item dropdown col-4">
                     <a class="nav-link dropdown-toggle" href="#" role="button"   data-bs-toggle="dropdown" style="color: black;font-size:16px">
                         categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Drama</a></li>
-                        <li><a class="dropdown-item" href="#">Comedy</a></li>
-                        <li><a class="dropdown-item" href="#">Thriller</a></li>
-                        <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
                     </ul>
                 </div>
-                <div class="col-3"></div>
-                    <form class="d-flex col-3">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex col-3" action="/movies/search" method="post">
+                        {% csrf_token %}
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
                         <button class="btn btn-outline-warning btn-sm" type="submit" style="color:black;">Search</button>
                     </form>
             </div>

@@ -1,3 +1,6 @@
+from multiprocessing import context
+from turtle import title
+from unicodedata import category
 from django.shortcuts import render, redirect
 from login_app.models import *
 from movie_app.models import *
@@ -41,3 +44,27 @@ def add_movie(request):
         this_movie.categories.add(this_categ)
     
     return redirect("/added_movies")
+
+def classify(request, categ):
+    this_user = User.objects.get(id = request.session['userid'])
+    this_category = Category.objects.get(name = categ)
+    categ_movies = this_category.movies.all()
+    context={
+            "user": this_user,
+            "movies": categ_movies
+            }
+    return render(request, "categ_movies.html", context)
+
+def search(request):
+    request.session["search"] = request.POST["search"]
+    print(request.session["search"])
+    return redirect("/movies/search_result")
+
+def search_result(request):
+    result = Movie.objects.filter(title__contains = request.session["search"])
+    print(result)
+    context={
+            "result": result
+            }
+    return render(request,"search_result.html", context)
+
