@@ -109,18 +109,18 @@
                             <div class="card top mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <iframe width="180" height="250" src="{{movie.trailer_url}}"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                        {%if movie.uplode_image%}
+                                        <img src="{{movie.uplode_image.url}}" class="img-fluid rounded-start" alt="...">
+                                        {%endif%}
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">{{movie.title}}</h5>
-                                            <p class="card-text">{{movie.desc}}
+                                            <p class="card-text1">{{movie.desc}}
                                             </p>
                                             <p class="card-text"><small class="text-muted">release date : {{movie.release_date}}</small>
                                             </p>
+                                            <a href="/movie/{{movie.id}}" class="btn btn-primary">Movie details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -147,21 +147,20 @@
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <div class="col-md-4">
-                                    <iframe width="180" height="250" src="{{movie.trailer_url}}"
-                                        title="YouTube video player" frameborder="0"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowfullscreen></iframe>
+                                    {%if movie.uplode_image%}
+                                    <img width="200px" height="300px" src="{{movie.uplode_image.url}}">
+                                    {%endif%}
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
                                     <h5 class="card-title">{{movie.title}}</h5>
-                                    <p class="card-text">
+                                    <p class="card-text1">
                                         {{movie.desc}}
                                     </p>
                                     <p class="card-text"><small class="text-muted">release date : {{movie.release_date}}</small>
                                     </p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <a href="/movie/{{movie.id}}" class="btn btn-primary">Movie details</a>
                                 </div>
                             </div>
                         </div>

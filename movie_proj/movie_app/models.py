@@ -1,3 +1,5 @@
+from email.policy import default
+from pickle import TRUE
 from django.db import models
 from login_app.models import *
 import datetime
@@ -39,9 +41,13 @@ class Movie(models.Model):
     to_watch_by = models.ManyToManyField(User, related_name="movies_to_watch")
     # relation-ship with the Category class:
     categories = models.ManyToManyField(Category, related_name="movies")
+    uplode_image = models.ImageField(null = True , blank = True , upload_to='images/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MovieManager()
+
+    def __str__(self):
+        return self.desc
     # comments = list of comments on the given movie
 
 

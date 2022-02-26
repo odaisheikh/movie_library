@@ -59,5 +59,14 @@ header a{
 .slid_container{
     flex: 5;
 }
+.card-text1{
+    height: 110px;
+    overflow-y:scroll;
+}
+iframe{
+    max-width: 180px;
+    overflow-x: scroll;
+
+}
 
 
