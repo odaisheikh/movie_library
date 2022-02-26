@@ -7,19 +7,18 @@ urlpatterns = [
     path('watch_list/', views.watch_list),
     path('adding_form', views.adding_form),
     path('add_movie', views.add_movie),
-<<<<<<< HEAD
+
     path('rate/<movie_id>', views.rate),
     path('add_to_watchlist/<movie_id>', views.add_to_watchlist),
     path('add_to_favorites/<movie_id>', views.add_to_favorites),
     path('remove_from_watchlist/<movie_id>', views.remove_from_watchlist),
-    path('remove_from_favorites/<movie_id>', views.remove_from_favorites)
-=======
-<<<<<<< HEAD
+    path('remove_from_favorites/<movie_id>', views.remove_from_favorites),
+
+
     path('category/<categ>', views.classify),
     path('movies/search', views.search),
     path('movies/search_result', views.search_result),
-=======
+
     path('rate/<movie_id>', views.rate)
->>>>>>> d6a5871d10acc7b0748cf471db1f5a97547689ec
->>>>>>> 864c03d326e1fdca0054b37bd6bb8cc960bf0822
+
 ]

@@ -1,10 +1,3 @@
-from multiprocessing import context
-<<<<<<< HEAD
-from turtle import title
-from unicodedata import category
-=======
-from platform import release
->>>>>>> d6a5871d10acc7b0748cf471db1f5a97547689ec
 from django.shortcuts import render, redirect
 from login_app.models import *
 from movie_app.models import *
@@ -95,8 +88,6 @@ def add_movie(request):
     for categ in categories:
         this_categ = Category.objects.get(name = categ)
         this_movie.categories.add(this_categ)
-<<<<<<< HEAD
-    
     return redirect("/added_movies")
 
 def classify(request, categ):
@@ -122,12 +113,10 @@ def search_result(request):
             }
     return render(request,"search_result.html", context)
 
-=======
-    return redirect("/")
 
 def rate(request,movie_id):
     this_user=User.objects.get(id= request.session['userid'])
     this_movie=Movie.objects.get(id=movie_id)
     Rate.objects.create(rate=request.POST['star'],movie=this_movie,user=this_user)
     return redirect(f'/movie/{movie_id}')
->>>>>>> d6a5871d10acc7b0748cf471db1f5a97547689ec
+
