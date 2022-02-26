@@ -9,7 +9,23 @@ def main(request):
     return render(request,"main_page.html")
 
 def favorite(request):
-    return render(request,"favorites.html")
+    this_user=User.objects.get(id= request.session['userid'])
+    context = {
+        'movies' : this_user.favorites.all()
+    }
+    return render(request,"favorites.html",context)
+
+def add_to_favorites(request,movie_id):
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    this_movie.liked_by.add(this_user)
+    return redirect (f'/movie/{movie_id}')
+
+def remove_from_favorites(request,movie_id):
+    this_movie = Movie.objects.get(id=movie_id)
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie.liked_by.remove(this_user)
+    return redirect (f'/movie/{movie_id}')
 
 def movie(request,movie_id):
     this_movie = Movie.objects.get(id=movie_id)
@@ -30,10 +46,23 @@ def movie(request,movie_id):
     return render(request,"movie.html",context)
 
 def watch_list(request):
+    this_user=User.objects.get(id= request.session['userid'])
     context = {
-        'movies' : Movie.objects.all()
+        'movies' : this_user.movies_to_watch.all()
     }
     return render(request,"watch_list.html",context)
+
+def add_to_watchlist(request,movie_id):
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    this_movie.to_watch_by.add(this_user)
+    return redirect (f'/movie/{movie_id}')
+
+def remove_from_watchlist(request,movie_id):
+    this_movie = Movie.objects.get(id=movie_id)
+    this_user=User.objects.get(id= request.session['userid'])
+    this_user.movies_to_watch.remove(this_movie)
+    return redirect (f'/movie/{movie_id}')
 
 def adding_form(request):
     return render(request, "add_movie.html")
