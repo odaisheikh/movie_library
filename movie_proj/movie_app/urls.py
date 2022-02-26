@@ -7,11 +7,8 @@ urlpatterns = [
     path('watch_list/', views.watch_list),
     path('adding_form', views.adding_form),
     path('add_movie', views.add_movie),
-<<<<<<< HEAD
     path('category/<categ>', views.classify),
     path('movies/search', views.search),
     path('movies/search_result', views.search_result),
-=======
     path('rate/<movie_id>', views.rate)
->>>>>>> d6a5871d10acc7b0748cf471db1f5a97547689ec
 ]
