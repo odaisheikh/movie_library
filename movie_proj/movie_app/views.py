@@ -12,8 +12,9 @@ def main(request):
 
 def favorite(request):
     this_user=User.objects.get(id= request.session['userid'])
-    context = {
-        'movies' : this_user.favorites.all()
+    context = { 
+        'movies' : this_user.favorites.all(),
+        'this_user' : this_user
     }
     return render(request,"favorites.html",context)
 
@@ -43,14 +44,16 @@ def movie(request,movie_id):
     context = {
         'avg' : avg,
         'this_movie' : this_movie,
-        'this_user' : User.objects.get(id=request.session['userid'])
+        'this_user' : User.objects.get(id=request.session['userid']),
+        'comments' : this_movie.comments.all()
     }
     return render(request,"movie.html",context)
 
 def watch_list(request):
     this_user=User.objects.get(id= request.session['userid'])
     context = {
-        'movies' : this_user.movies_to_watch.all()
+        'movies' : this_user.movies_to_watch.all(),
+        'this_user' : this_user
     }
     return render(request,"watch_list.html",context)
 
@@ -120,3 +123,8 @@ def rate(request,movie_id):
     Rate.objects.create(rate=request.POST['star'],movie=this_movie,user=this_user)
     return redirect(f'/movie/{movie_id}')
 
+def comment(request,movie_id):
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    Comment.objects.create(comment=request.POST['comment'],movie=this_movie,user=this_user)
+    return redirect(f'/movie/{movie_id}')

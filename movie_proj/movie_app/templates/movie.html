@@ -35,7 +35,7 @@
                     <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Contact us</a>
                 </div>
                 <div class="col-1">
-                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">yore name</a>
+                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">{{this_user.first_name}}</a>
                 </div>
                 <div class="col-1">
                     <a href="/" class="btn btn-warning btn-sm" style="font-size:16px;">Logout</a>
@@ -47,27 +47,28 @@
         <div class="container-fluid">
             <div class="row  head align-items-center justify-content-center px-5 py-2 ">
                 <div class="col-1">
-                    <a href="#" style="color: black; font-size:18px;">Movies</a>
+                    <a href="/" style="color: black; font-size:18px;">Movies</a>
                 </div>
                 <div class="col-1">
-                    <a href="#" style="color: black; font-size:18px;">TV Shows</a>
+                    <a href="#" style="color: black; font-size:18px;">My Movies</a>
                 </div>
                 <div class="col-1 watch">
-                    <a href="#" style="color: black; font-size:18px;">Watch List</a>
+                    <a href="/watch_list" style="color: black; font-size:18px;">Watch List</a>
                 </div>
-                <div class="col-1">
-                    <a href="#"  style="color: black; font-size:18px;">Favorites</a>
+                <div class="col-1"> 
+                    <a href="/favorite"  style="color: black; font-size:18px;">Favorites</a>
                 </div>
                 <div class="nav-item dropdown col-1">
                     <a class="nav-link dropdown-toggle" href="#" role="button"   data-bs-toggle="dropdown" style="color: black;font-size:16px">
                         categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Drama</a></li>
-                        <li><a class="dropdown-item" href="#">Comedy</a></li>
-                        <li><a class="dropdown-item" href="#">Thriller</a></li>
-                        <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
                     </ul>
                 </div>
                 <div class="col-3"></div>
@@ -78,31 +79,28 @@
             </div>
         </div>
     </nav>
-    <div class="main_movie">
-        <div class="card text-center">
-            <div class="card-body">
-                <div class="card mb-3" style="max-width: 940px; max-height: 600px;">
-                    <div class="row g-0 flex">
-                        <div class="col-md-4">
-                            <iframe width="400" height="300" src="https://www.youtube.com/embed/Cp0W7zniab4" title="YouTube video player" frameborder="0" 
+        <div class="card" style="margin-top: 0px;">
+            <div class="card-body ">
+                <div class="card mb-3 " style=" max-height: 600px;">
+                    <div class="row col-12">
+                        <div class="col-7">
+                            <iframe class="col-12" height="300" src="https://www.youtube.com/embed/Cp0W7zniab4" title="YouTube video player" frameborder="0" 
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This is a wider card with supporting text below as a natural
-                                    lead-in to additional content. This content is a little bit longer.</p>
-                                {% if this_movie in this_user.movies_to_watch.all %}
-                                <a href="/remove_from_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form watch list</a></button> 
-                                {% else %}
-                                <a href="/add_to_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to watch list</a></button>
-                                {% endif %}
-                                {% if this_movie in this_user.favorites.all %}
-                                <a href="/remove_from_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form favorites</a></button> 
-                                {% else %}
-                                <a href="/add_to_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to favorites</a></button>
-                                {% endif %}
-                                <div class="row align-items-center justify-content-center px-5 py-2">
+                        <div class="card-body col-4 text-center">
+                            <h5 class="card-title">{{this_movie.title}}</h5>
+                            <p class="card-text">{{this_movie.desc}}</p>
+                            {% if this_movie in this_user.movies_to_watch.all %}
+                            <a href="/remove_from_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form watch list</a></button> 
+                            {% else %}
+                            <a href="/add_to_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to watch list</a></button>
+                            {% endif %}
+                            {% if this_movie in this_user.favorites.all %}
+                            <a href="/remove_from_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form favorites</a></button> 
+                            {% else %}
+                            <a href="/add_to_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to favorites</a></button>
+                            {% endif %}
+                            <div class="row align-items-center justify-content-center px-5 py-2">
                                 <form action="/rate/{{this_movie.id}}" method="post">
                                     <button type="submit" class="btn btn-warning">Rank</button>
                                     <span>{{avg}}</span>
@@ -123,20 +121,23 @@
                                         </div>  
                                 </form>
                             </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+                <div class="comment" style="border-top: 1px solid black;">
+                    <form  action="/comment/{{this_movie.id}}" method="post">
+                        {% csrf_token %}
+                        <textarea class="col-7" style="margin-top: 3px;" name="comment" id="" cols="30" rows="3" placeholder="add a comment"></textarea>
+                        <div class="col-7"style="text-align: end;"><button type="submit" class="btn btn-warning ">Comment</button></div>
+                    </form>
+                    <ul style="list-style: none;">
+                        {% for comment in comments %}
+                        <li>- {{comment.user.first_name}} {{comment.user.last_name}} -{{comment.created_at}}</li>
+                        <li>{{comment.comment}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-        </div>
-        
-        <div class="comment">
-            <form style="width: 700px;"  class="post" action="/post/{{message_user.id}}" method="post">
-                <!-- {% csrf_token %} -->
-                <!-- <input type="hidden" name="which_form" value="post_coment"> -->
-                <textarea style="width: 700px;" name="coment" id="" cols="30" rows="3" placeholder="add a comment"></textarea>
-                <div style="text-align: end;"><button type="button" class="btn btn-warning ">Comment</button></div>
-            </form>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

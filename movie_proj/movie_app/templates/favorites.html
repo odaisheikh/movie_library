@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/login_reg.css' %}">
-    <link rel="stylesheet" href="{% static 'css/watch_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/watch_list.css' %} ?20181209">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/watch_list.css">
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <div class="container-fluid" >
             <div class="row  head align-items-center justify-content-center px-5 py-2">
                 <div class="col-2">
-                    <img src="../static/img/project_logo1.png" alt="Movies House" height="50px" >
+                    <img src='../static/img/project_logo1.png' class="img-fluid rounded-start" alt="...">
                 </div>
                 <div class="col-1">
                     <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Home</a>
@@ -30,10 +30,10 @@
                     <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Contact us</a>
                 </div>
                 <div class="col-1">
-                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">Login</a>
+                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">{{this_user.first_name}}</a>
                 </div>
                 <div class="col-1">
-                    <a href="#" class="btn btn-warning btn-sm" style="font-size:16px;">Sign Up</a>
+                    <a href="/" class="btn btn-warning btn-sm" style="font-size:16px;">logout</a>
                 </div>
             </div>
         </div>
@@ -42,13 +42,13 @@
         <div class="container-fluid">
             <div class="row  head align-items-center justify-content-center px-5 py-2 ">
                 <div class="col-1">
-                    <a href="#" style="color: black; font-size:18px;">Movies</a>
+                    <a href="/" style="color: black; font-size:18px;">Movies</a>
                 </div>
-                <div class="col-1">
-                    <a href="#" style="color: black; font-size:18px;">TV Shows</a>
+                <div style="width: 130px;">
+                    <a href="#" style="color: black; font-size:18px;">My Movies</a>
                 </div>
                 <div class="col-1 watch">
-                    <a href="#" style="color: black; font-size:18px;">Watch List</a>
+                    <a href="/watch_list/" style="color: black; font-size:18px;">Watch List</a>
                 </div>
                 <div class="col-1">
                     <a href="#"  style="color: black; font-size:18px;">Favorites</a>
@@ -58,11 +58,12 @@
                         categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Drama</a></li>
-                        <li><a class="dropdown-item" href="#">Comedy</a></li>
-                        <li><a class="dropdown-item" href="#">Thriller</a></li>
-                        <li><a class="dropdown-item" href="#">Fantasy</a></li>
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
                     </ul>
                 </div>
                 <div class="col-3"></div>
@@ -75,16 +76,18 @@
     </nav>
 
     <div class="container-fluid  mainbody">
-        <div class="row align-items-center justify-content-start ">
-            <div class="card col-3 bg-gardient mx-3" style="height: 450px;">
+        <div class="row align-items-center justify-content-start">
+            {% for movie in movies %}
+            <div class="card col-3 bg-gardient mx-3" >
                 <img  src="https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg"class="card-img-top" alt="movie_cover">
                 <div class="card-body">
-                    <h5 class="card-title">Movie Name</h5>
-                    <p class="card-text">Movie Description</p>
-                    <a href="#" class="btn btn-warning">Details</a>
-                    <a href="#" class="btn btn-warning">Remove from Watch List</a>
+                    <h5 class="card-title">{{movie.title}}</h5>
+                    <p class="card-text overflow-auto">{{movie.desc}}</p>
+                    <a href="/movie/{{movie.id}}" class="btn btn-warning">Details</a>
+                    <a href="/remove_from_favorites/{{movie.id}}" class="btn btn-warning">Remove from favorites</a>
                 </div>
             </div>
+            {% endfor %} 
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

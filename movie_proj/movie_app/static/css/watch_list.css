@@ -28,8 +28,8 @@ nav a{
     background-size: cover;
 }
 .card{
+    opacity: 0.88;
     margin-top: 10px;
-    opacity: 0.9;
 }
 .watch{
     width: 140px;
