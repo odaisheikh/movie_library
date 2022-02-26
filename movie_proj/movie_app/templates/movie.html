@@ -93,14 +93,14 @@
                                 <p class="card-text">This is a wider card with supporting text below as a natural
                                     lead-in to additional content. This content is a little bit longer.</p>
                                 {% if this_movie in this_user.movies_to_watch.all %}
-                                <button type="submit" class="btn btn-warning"><a href="#"></a>Remove form watch list</button> 
+                                <a href="/remove_from_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form watch list</a></button> 
                                 {% else %}
-                                <button type="submit" class="btn btn-warning"><a href="#"></a>Add to watch list</button>
+                                <a href="/add_to_watchlist/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to watch list</a></button>
                                 {% endif %}
                                 {% if this_movie in this_user.favorites.all %}
-                                <button type="submit" class="btn btn-warning"><a href="#"></a>Remove form favorites</button> 
+                                <a href="/remove_from_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Remove form favorites</a></button> 
                                 {% else %}
-                                <button type="submit" class="btn btn-warning"><a href="#"></a>Add to favorites</button>
+                                <a href="/add_to_favorites/{{this_movie.id}}"><button type="submit" class="btn btn-warning">Add to favorites</a></button>
                                 {% endif %}
                                 <div class="row align-items-center justify-content-center px-5 py-2">
                                 <form action="/rate/{{this_movie.id}}" method="post">

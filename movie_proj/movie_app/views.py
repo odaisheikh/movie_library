@@ -11,7 +11,23 @@ def main(request):
         return render(request,"main_page.html" , context)
 
 def favorite(request):
-    return render(request,"favorites.html")
+    this_user=User.objects.get(id= request.session['userid'])
+    context = {
+        'movies' : this_user.favorites.all()
+    }
+    return render(request,"favorites.html",context)
+
+def add_to_favorites(request,movie_id):
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    this_movie.liked_by.add(this_user)
+    return redirect (f'/movie/{movie_id}')
+
+def remove_from_favorites(request,movie_id):
+    this_movie = Movie.objects.get(id=movie_id)
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie.liked_by.remove(this_user)
+    return redirect (f'/movie/{movie_id}')
 
 def movie(request,movie_id):
     this_movie = Movie.objects.get(id=movie_id)
@@ -32,10 +48,23 @@ def movie(request,movie_id):
     return render(request,"movie.html",context)
 
 def watch_list(request):
+    this_user=User.objects.get(id= request.session['userid'])
     context = {
-        'movies' : Movie.objects.all()
+        'movies' : this_user.movies_to_watch.all()
     }
     return render(request,"watch_list.html",context)
+
+def add_to_watchlist(request,movie_id):
+    this_user=User.objects.get(id= request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    this_movie.to_watch_by.add(this_user)
+    return redirect (f'/movie/{movie_id}')
+
+def remove_from_watchlist(request,movie_id):
+    this_movie = Movie.objects.get(id=movie_id)
+    this_user=User.objects.get(id= request.session['userid'])
+    this_user.movies_to_watch.remove(this_movie)
+    return redirect (f'/movie/{movie_id}')
 
 def adding_form(request):
     return render(request, "add_movie.html")
@@ -84,8 +113,16 @@ def search_result(request):
             }
     return render(request,"search_result.html", context)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dc910ba0d2354191881b7ee2be2281748f3bea17
 def rate(request,movie_id):
     this_user=User.objects.get(id= request.session['userid'])
     this_movie=Movie.objects.get(id=movie_id)
     Rate.objects.create(rate=request.POST['star'],movie=this_movie,user=this_user)
     return redirect(f'/movie/{movie_id}')
+<<<<<<< HEAD
+=======
+
+>>>>>>> dc910ba0d2354191881b7ee2be2281748f3bea17
