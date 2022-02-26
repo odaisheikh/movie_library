@@ -1,3 +1,5 @@
+from multiprocessing import context
+from platform import release
 from django.shortcuts import render, redirect
 from login_app.models import *
 from movie_app.models import *
@@ -5,7 +7,10 @@ from django.contrib import messages
 
 
 def main(request):
-    return render(request,"main_page.html")
+    context = {
+        'all_movies' : Movie.objects.all().order_by('-release_date')
+    }
+    return render(request,"main_page.html" , context)
 
 def favorite(request):
     return render(request,"favorites.html")
@@ -29,15 +34,16 @@ def add_movie(request):
     user_id = request.session['userid']
     this_user = User.objects.get(id = user_id)
     this_movie = Movie.objects.create(
-                                    title = request.POST['title'],
-                                    release_date = request.POST['rel_date'],
-                                    desc = request.POST['desc'],
-                                    trailer_url = request.POST['trailer_url'],
-                                    added_by = this_user,
-                                    )
+        title = request.POST['title'],
+        release_date = request.POST['rel_date'],
+        desc = request.POST['desc'],
+        trailer_url = request.POST['trailer_url'],
+        added_by = this_user,
+        )
     categories = request.POST.getlist('categ')
     for categ in categories:
         this_categ = Category.objects.get(name = categ)
         this_movie.categories.add(this_categ)
     
-    return redirect("/added_movies")
+    return redirect("/")
+

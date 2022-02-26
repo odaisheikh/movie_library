@@ -1,7 +1,7 @@
 from django.urls import path     
 from . import views
 urlpatterns = [
-    path('main_page/', views.main),   
+    path('', views.main),   
     path('favorite/', views.favorite),
     path('movie/', views.movie),   
     path('watch_list/', views.watch_list),
