@@ -1,14 +1,23 @@
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
 from login_app.models import *
 from movie_app.models import *
 from django.contrib import messages
 
 
 def main(request):
-        context = {
-            'all_movies' : Movie.objects.all().order_by('-release_date')
-        }
-        return render(request,"main_page.html" , context)
+    # Autocomplete jquerry for search box 
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+
+    context = {
+        'all_movies' : Movie.objects.all().order_by('-release_date')
+    }
+    return render(request,"main_page.html" , context)
 
 def favorite(request):
     this_user=User.objects.get(id= request.session['userid'])
@@ -31,6 +40,14 @@ def remove_from_favorites(request,movie_id):
     return redirect (f'/movie/{movie_id}')
 
 def movie(request,movie_id):
+    # Autocomplete jquerry for search box 
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+
     this_movie = Movie.objects.get(id=movie_id)
     x= this_movie.rates.all()
     sum = 0
@@ -50,10 +67,18 @@ def movie(request,movie_id):
     return render(request,"movie.html",context)
 
 def watch_list(request):
+    # Autocomplete jquerry for search box 
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+
     this_user=User.objects.get(id= request.session['userid'])
     context = {
-        'movies' : this_user.movies_to_watch.all(),
-        'this_user' : this_user
+        'this_user': this_user,
+        'movies' : this_user.movies_to_watch.all()
     }
     return render(request,"watch_list.html",context)
 
@@ -85,15 +110,24 @@ def add_movie(request):
         release_date = request.POST['rel_date'],
         desc = request.POST['desc'],
         trailer_url = request.POST['trailer_url'],
+        uplode_image = request.FILES['image'],
         added_by = this_user,
         )
     categories = request.POST.getlist('categ')
     for categ in categories:
         this_categ = Category.objects.get(name = categ)
         this_movie.categories.add(this_categ)
-    return redirect("/added_movies")
+    return redirect("/")
 
 def classify(request, categ):
+    # Autocomplete jquerry for search box 
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+
     this_user = User.objects.get(id = request.session['userid'])
     this_category = Category.objects.get(name = categ)
     categ_movies = this_category.movies.all()
@@ -109,13 +143,21 @@ def search(request):
     return redirect("/movies/search_result")
 
 def search_result(request):
+    this_user=User.objects.get(id= request.session['userid'])
     result = Movie.objects.filter(title__contains = request.session["search"])
+    
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
     print(result)
     context={
+            "user": this_user,
             "result": result
             }
     return render(request,"search_result.html", context)
-
 
 def rate(request,movie_id):
     this_user=User.objects.get(id= request.session['userid'])
@@ -123,8 +165,21 @@ def rate(request,movie_id):
     Rate.objects.create(rate=request.POST['star'],movie=this_movie,user=this_user)
     return redirect(f'/movie/{movie_id}')
 
-def comment(request,movie_id):
+def my_movies(request):
     this_user=User.objects.get(id= request.session['userid'])
-    this_movie=Movie.objects.get(id=movie_id)
-    Comment.objects.create(comment=request.POST['comment'],movie=this_movie,user=this_user)
-    return redirect(f'/movie/{movie_id}')
+    my_movies = this_user.added_movies.all()
+    
+    # Autocomplete jquerry for search box 
+    if "term" in request.GET:
+        sr = Movie.objects.filter(title__contains = request.GET.get('term'))
+        titles = []
+        for movie in sr:
+            titles.append(movie.title)
+        return JsonResponse(titles, safe=False)
+
+    context={
+            "user": this_user,
+            "movies": my_movies
+            }
+    return render(request,"my_movies.html", context)
+

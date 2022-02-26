@@ -14,8 +14,8 @@ urlpatterns = [
     path('remove_from_favorites/<movie_id>', views.remove_from_favorites),
     path('category/<categ>', views.classify),
     path('movies/search', views.search),
-    path('movies/search_result', views.search_result),
+    path('movies/search_result', views.search_result, name="search_result"),
     path('rate/<movie_id>', views.rate),
-    path('comment/<movie_id>', views.comment)
+    path('my_movies', views.my_movies),
 
 ]
