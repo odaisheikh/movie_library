@@ -39,7 +39,6 @@ class Movie(models.Model):
     to_watch_by = models.ManyToManyField(User, related_name="movies_to_watch")
     # relation-ship with the Category class:
     categories = models.ManyToManyField(Category, related_name="movies")
-
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = MovieManager()
@@ -53,6 +52,13 @@ class Comment(models.Model):
     # relation-ship with the User class:
     user = models.ForeignKey(User, related_name="comments", on_delete = models.CASCADE)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Rate(models.Model):
+    rate = models.IntegerField()
+    movie= models.ForeignKey(Movie, related_name="rates", on_delete = models.CASCADE)
+    user = models.ForeignKey(User, related_name="rates", on_delete = models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
