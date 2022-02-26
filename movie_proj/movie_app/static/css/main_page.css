@@ -19,6 +19,7 @@ header a{
 } */
 .slid_container{
     background-color: #212529;
+    height: auto;
 }
 .carousel-item img{
     height: 200px;
@@ -43,20 +44,20 @@ header a{
     width: 50%;
     height: inherit;
 }
-.sid_bar{
-    width: 150px;
-    height: 800px;
-    background-color: #212529;
-    flex: 1;
-    background-image: url("../css/Beauty_Skincare_Neutral_Website.png");
-}
 .main_container{
     display: flex;
-    background-image: url("../css/Beauty_Skincare_Neutral_Website.png");
+    height: auto;
+    /* background-image: url("../img/puddle_jumper_octodex.jpg"); */
 
 }
+.sid_bar{
+    /* width: 150px; */
+    background-color: #212529;
+    flex: 2;
+    background-image: url("static/css/Beauty_Skincare_Neutral_Website.png");
+}
 .slid_container{
-    flex: 4;
+    flex: 5;
 }
 
 

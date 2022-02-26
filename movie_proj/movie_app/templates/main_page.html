@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movies Home</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/main_page.css' %}?20181209" >
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}?201812" >
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
@@ -91,45 +91,7 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/download (1).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/download (1).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
+                                            <h5 class="card-title">{{movie.title}}</h5>
                                             <p class="card-text">This is a wider card with supporting text below as a
                                                 natural lead-in to additional content. This content is a little bit
                                                 longer.
@@ -142,153 +104,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
+                        {% for movie in all_movies%}
+                        <div class="carousel-item ">
+                            <div class="card top mb-3" style="max-width: 540px;">
                                 <div class="row g-0">
                                     <div class="col-md-4">
-                                        <img src="../static/img/download (2).jpg" class="img-fluid rounded-start" alt="...">
+                                        <iframe width="180" height="250" src="{{movie.trailer_url}}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
+                                            <h5 class="card-title">{{movie.title}}</h5>
+                                            <p class="card-text">{{movie.desc}}
                                             </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
+                                            <p class="card-text"><small class="text-muted">release date : {{movie.release_date}}</small>
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/download (3).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/download.jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/images (1).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/images (2).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/images.jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="card mb-3" style="max-width: 540px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <img src="../static/img/download (1).jpg" class="img-fluid rounded-start" alt="...">
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Card title</h5>
-                                            <p class="card-text">This is a wider card with supporting text below as a
-                                                natural lead-in to additional content. This content is a little bit
-                                                longer.
-                                            </p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins
-                                                    ago</small>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {%endfor%}
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                         data-bs-slide="prev">
@@ -302,7 +140,35 @@
                     </button>
                 </div>
             </div>
-            <div class="sid_bar"></div>
+            <div class="sid_bar">
+                {% for movie in all_movies%}
+                <div style="width: inherit; max-height: 300px; background-color:#ffc107" >
+                    <div class="card1 mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <div class="col-md-4">
+                                    <iframe width="180" height="250" src="{{movie.trailer_url}}"
+                                        title="YouTube video player" frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{movie.title}}</h5>
+                                    <p class="card-text">
+                                        {{movie.desc}}
+                                    </p>
+                                    <p class="card-text"><small class="text-muted">release date : {{movie.release_date}}</small>
+                                    </p>
+                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

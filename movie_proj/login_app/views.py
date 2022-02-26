@@ -29,7 +29,7 @@ def register(request):
             password = pw_hash,
         )
         request.session['userid'] = user.id
-        return redirect("/main_page")
+        return redirect("/")
     else:
         return redirect("/")
 

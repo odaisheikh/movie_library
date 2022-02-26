@@ -10,6 +10,12 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'css/style.css' %} ?201812093">
         <link rel="stylesheet" href="{% static 'css/watch_list.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            input.radio{
+            color: #ffc107;
+            }
+        </style>
 </head>
 
 <body>
@@ -78,23 +84,52 @@
                 <div class="card mb-3" style="max-width: 940px; max-height: 600px;">
                     <div class="row g-0 flex">
                         <div class="col-md-4">
-                            <iframe width="400" height="300" src="https://www.youtube.com/embed/xuAtSIeM-oI"
-                                title="YouTube video player" frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen></iframe>
+                            <iframe width="400" height="300" src="https://www.youtube.com/embed/Cp0W7zniab4" title="YouTube video player" frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">This is a wider card with supporting text below as a natural
                                     lead-in to additional content. This content is a little bit longer.</p>
-                                <button type="button" class="btn btn-warning"><a href="#"></a>add to favorit</button> <button type="button" class="btn btn-warning"><a href="#"></a>Rank</button>
+                                {% if this_movie in this_user.movies_to_watch.all %}
+                                <button type="submit" class="btn btn-warning"><a href="#"></a>Remove form watch list</button> 
+                                {% else %}
+                                <button type="submit" class="btn btn-warning"><a href="#"></a>Add to watch list</button>
+                                {% endif %}
+                                {% if this_movie in this_user.favorites.all %}
+                                <button type="submit" class="btn btn-warning"><a href="#"></a>Remove form favorites</button> 
+                                {% else %}
+                                <button type="submit" class="btn btn-warning"><a href="#"></a>Add to favorites</button>
+                                {% endif %}
+                                <div class="row align-items-center justify-content-center px-5 py-2">
+                                <form action="/rate/{{this_movie.id}}" method="post">
+                                    <button type="submit" class="btn btn-warning">Rank</button>
+                                    <span>{{avg}}</span>
+                                    {% csrf_token %}
+                                    <div class="row">
+                                            <label class="col-1">1</label>
+                                            <input type="radio" class="col-1" name="star" value="1">
+                                            <input type="radio" class="col-1" name="star" value="2">
+                                            <input type="radio" class="col-1" name="star" value="3">
+                                            <input type="radio" class="col-1" name="star" value="4">
+                                            <input type="radio" class="col-1" name="star" value="5">
+                                            <input type="radio" class="col-1" name="star" value="6">
+                                            <input type="radio" class="col-1" name="star" value="7">
+                                            <input type="radio" class="col-1" name="star" value="8">
+                                            <input type="radio" class="col-1" name="star" value="9">
+                                            <input type="radio" class="col-1" name="star" value="10">
+                                            <label class="col-1">10</label>
+                                        </div>  
+                                </form>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="comment">
             <form style="width: 700px;"  class="post" action="/post/{{message_user.id}}" method="post">
                 <!-- {% csrf_token %} -->
