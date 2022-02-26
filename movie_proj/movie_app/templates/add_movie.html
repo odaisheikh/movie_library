@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="/add_movie" method="post">
+                        <form action="/add_movie" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <label for="title">Movie Title</label>
                             <input type="text" class="form-control" name="title" id="title">
@@ -65,6 +65,9 @@
                                 <input class="form-check-input" type="checkbox" name="categ" id="inlineCheckbox6" value="action">
                                 <label class="form-check-label" for="inlineCheckbox6">Action</label>
                             </div>
+
+                            <label for="title">upload picture</label>
+                            <input type="file" class="form-control" name="image" id="title">
                             
                             <button type="submit" class="btn btn-warning btn-sm">Add movie</button>
                             

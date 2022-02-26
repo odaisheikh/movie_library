@@ -108,13 +108,14 @@ def add_movie(request):
         release_date = request.POST['rel_date'],
         desc = request.POST['desc'],
         trailer_url = request.POST['trailer_url'],
+        uplode_image = request.FILES['image'],
         added_by = this_user,
         )
     categories = request.POST.getlist('categ')
     for categ in categories:
         this_categ = Category.objects.get(name = categ)
         this_movie.categories.add(this_categ)
-    return redirect("/added_movies")
+    return redirect("/")
 
 def classify(request, categ):
     # Autocomplete jquerry for search box 
