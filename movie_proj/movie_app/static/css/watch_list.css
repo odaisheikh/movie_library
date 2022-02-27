@@ -18,10 +18,10 @@ nav a{
 }
 .mainbody{
     background-image: url("../css/Beauty_Skincare_Neutral_Website.png");
-
     opacity: 0.9;
     background-repeat: no-repeat;
     background-size: cover;
+    background-color: gray;
 }
 .card{
     opacity: 0.88;

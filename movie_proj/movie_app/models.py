@@ -44,6 +44,7 @@ class Movie(models.Model):
     uplode_image = models.ImageField(null = True , blank = True , upload_to='images/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    likes = models.IntegerField(default=0)
     objects = MovieManager()
 
     def __str__(self):

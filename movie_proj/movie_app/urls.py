@@ -18,5 +18,6 @@ urlpatterns = [
     path('rate/<movie_id>', views.rate),
     path('my_movies', views.my_movies),
     path('logout', views.logout),
-    path('comment/<movie_id>', views.comment)
+    path('comment/<movie_id>', views.comment),
+    path('about_us', views.about_us)
 ]

@@ -15,14 +15,16 @@ def main(request):
         return JsonResponse(titles, safe=False)
     if 'userid' in request.session:
         context = {
-        'all_movies' : Movie.objects.all().order_by('-release_date')[:2],
+        'all_movies' : Movie.objects.all().order_by('-release_date')[:6],
+        'most_popular' : Movie.objects.all().order_by('-likes')[:10],
         'first_movies' : Movie.objects.all().order_by('-release_date')[0],
         'this_user' : User.objects.get(id=request.session['userid'])
         }
         return render(request,"main_page.html" , context)
     else :
         context = {
-            'all_movies' : Movie.objects.all().order_by('-release_date')
+            'all_movies' : Movie.objects.all().order_by('-release_date'),
+            'most_popular' : Movie.objects.all().order_by('-likes')[:10]
         }
         return render(request,"main_page.html" , context)
 
@@ -39,12 +41,16 @@ def add_to_favorites(request,movie_id):
     this_user=User.objects.get(id= request.session['userid'])
     this_movie=Movie.objects.get(id=movie_id)
     this_movie.liked_by.add(this_user)
+    this_movie.likes += 1 
+    this_movie.save()
     return redirect (f'/movie/{movie_id}')
 
 def remove_from_favorites(request,movie_id):
     this_movie = Movie.objects.get(id=movie_id)
     this_user=User.objects.get(id= request.session['userid'])
     this_movie.liked_by.remove(this_user)
+    this_movie.likes -= 1 
+    this_movie.save()
     return redirect (f'/movie/{movie_id}')
 
 def movie(request,movie_id):
@@ -201,3 +207,6 @@ def comment(request,movie_id):
     this_movie=Movie.objects.get(id=movie_id)
     Comment.objects.create(movie=this_movie,user=this_user,comment=request.POST['comment'])
     return redirect(f'/movie/{movie_id}')
+
+def about_us(request):
+    return render(request,'about_us.html')

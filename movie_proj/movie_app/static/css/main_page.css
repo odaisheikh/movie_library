@@ -15,6 +15,7 @@ header a{
 }
 .main_container{
     background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
+    background-color: gray;
 }
 .slid_container{
     background-color: #212529;
