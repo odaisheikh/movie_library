@@ -2,12 +2,8 @@
     display: flex;
     justify-content: space-evenly;
 }
-.card-body{
-    margin-left: 20%;
-}
-.comment{
-    display: flex;
-    justify-content: center;
+a{
+    text-decoration: none;
 }
 textarea{
     border-radius: 5px;

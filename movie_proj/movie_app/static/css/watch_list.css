@@ -24,6 +24,7 @@ nav a{
     background-size: cover;
 }
 .card{
+    opacity: 0.88;
     margin-top: 10px;
     height: 500px;
     background-color: rgba(0, 0, 0, 0.6) !important;
