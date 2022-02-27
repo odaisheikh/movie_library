@@ -15,8 +15,9 @@ def main(request):
         return JsonResponse(titles, safe=False)
     if 'userid' in request.session:
         context = {
-            'all_movies' : Movie.objects.all().order_by('-release_date'),
-            'this_user' : User.objects.get(id=request.session['userid'])
+        'all_movies' : Movie.objects.all().order_by('-release_date')[:2],
+        'first_movies' : Movie.objects.all().order_by('-release_date')[0],
+        'this_user' : User.objects.get(id=request.session['userid'])
         }
         return render(request,"main_page.html" , context)
     else :
@@ -24,6 +25,7 @@ def main(request):
             'all_movies' : Movie.objects.all().order_by('-release_date')
         }
         return render(request,"main_page.html" , context)
+
 
 def favorite(request):
     this_user=User.objects.get(id= request.session['userid'])
@@ -193,3 +195,9 @@ def logout(request):
     del(request.session['userid'])
     del(request.session['from'])
     return redirect('/login_form')
+
+def comment(request,movie_id):
+    this_user=User.objects.get(id=request.session['userid'])
+    this_movie=Movie.objects.get(id=movie_id)
+    Comment.objects.create(movie=this_movie,user=this_user,comment=request.POST['comment'])
+    return redirect(f'/movie/{movie_id}')
