@@ -16,7 +16,7 @@ def register(request):
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/')
+        return redirect('/login_form')
     
     if request.POST['confirm_pw'] == request.POST['password']:
         password = request.POST['password']
@@ -29,31 +29,31 @@ def register(request):
             password = pw_hash,
         )
         request.session['userid'] = user.id
+        request.session['from'] = "success"
         return redirect("/")
     else:
-        return redirect("/")
+        return redirect("/login_form")
 
 # Method to check the login validators, then redirect to the books page if there is no errors,
 # or to the root if there is some errors
 def login(request):
-
     errors = User.objects.login_val(request.POST)
     request.session["error_from"] = "login"
     if len(errors) > 0:
         for key, value in errors.items():
             messages.error(request, value)
-        return redirect('/')
+        return redirect('/login_form')
         
     user = User.objects.filter(email = request.POST['email'])
     if user:
         logged_user = user[0]
         if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):
             request.session['userid'] = logged_user.id
+            request.session['from'] = "success"
             return redirect("/")
         else:
             messages.error(request, "invalid email or password")
     else:
         messages.error(request, "invalid email or password")
-
-    return redirect("/")
+    return redirect("/login_form")
 

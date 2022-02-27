@@ -30,9 +30,22 @@
                 <div class="col-5">
                     <a href="#" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Contact us</a>
                 </div>
+                {% if 'from' in request.session %}
                 <div class="col-1">
                     <a href="/adding_form" class="btn outline-warning btn-sm ms-3"
                         style="color: #ffc107; font-size:16px;">Add Movie</a>
+                </div>
+                <div class="col-1">
+                    <a href="#" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">{{this_user.first_name}}</a>
+                </div>
+                <div class="col-1">
+                    <a href="/logout" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Log out</a>
+                </div>
+                {% else %}
+                <div class="col-1">
+                    <span></span>
                 </div>
                 <div class="col-1">
                     <a href="/login_form" class="btn outline-warning btn-sm ms-3"
@@ -41,17 +54,16 @@
                 <div class="col-1">
                     <a href="/login_form" class="btn btn-warning btn-sm" style="font-size:16px;">Sign Up</a>
                 </div>
+                {% endif %}
             </div>
         </div>
     </header>
     <nav>
         <div class="container-fluid">
             <div class="row  head align-items-center justify-content-center" style="height: 50px;">
+                {% if 'from' in request.session %}
                 <div class="col-1">
-                    <a href="" style="color: black; font-size:16px;">Movies</a>
-                </div>
-                <div class="col-1">
-                    <a href="#" style="color: black; font-size:16px;">TV Shows</a>
+                    <a href="/" style="color: black; font-size:16px;">Movies</a>
                 </div>
                 <div class="col-1 watch">
                     <a href="/watch_list" style="color: black; font-size:16px;">Watch List</a>
@@ -82,6 +94,40 @@
                         name="search" id="movie_title">
                     <button class="btn btn-outline-warning btn-sm" type="submit" style="color:black;">Search</button>
                 </form>
+                {% else %}
+                <div class="col-1">
+                    <a href="/" style="color: black; font-size:16px;">Movies</a>
+                </div>
+                <div class="col-1 watch">
+                    <a href="/login_form" style="color: black; font-size:16px;">Watch List</a>
+                </div>
+                <div class="col-1">
+                    <a href="/login_form" style="color: black; font-size:16px;">Favorites</a>
+                </div>
+                <div class="nav-item dropdown col-3">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        style="color: black;font-size:16px">
+                        categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+                    </ul>
+                </div>
+                <div class="col-1 watch">
+                    <a href="/login_form" style="color: black; font-size:16px;">My Movies</a>
+                </div>
+                <form class="d-flex col-3" action="/movies/search" method="post">
+                    {% csrf_token %}
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search" id="movie_title">
+                    <button class="btn btn-outline-warning btn-sm" type="submit" style="color:black;">Search</button>
+                </form>
+                {% endif %}
             </div>
         </div>
     </nav>
