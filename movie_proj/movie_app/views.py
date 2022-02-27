@@ -18,7 +18,7 @@ def main(request):
         context = {
         'all_movies' : Movie.objects.all().order_by('-release_date')[:6],
         'most_popular' : Movie.objects.all().order_by('-likes')[:10],
-        'first_movies' : Movie.objects.all().order_by('-release_date')[0],
+        'first_movies' : Movie.objects.all().order_by('-release_date')[:1],
         'this_user' : User.objects.get(id=request.session['userid'])
         }
         return render(request,"main_page.html" , context)
