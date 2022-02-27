@@ -15,7 +15,8 @@ def main(request):
         return JsonResponse(titles, safe=False)
 
     context = {
-        'all_movies' : Movie.objects.all().order_by('-release_date')
+        'all_movies' : Movie.objects.all().order_by('-release_date')[:5],
+        'first_movies' : Movie.objects.all().order_by('-release_date')[0],
     }
     return render(request,"main_page.html" , context)
 
