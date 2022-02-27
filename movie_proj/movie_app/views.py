@@ -16,16 +16,17 @@ def main(request):
         return JsonResponse(titles, safe=False)
     if 'userid' in request.session:
         context = {
-        'all_movies' : Movie.objects.all().order_by('-release_date')[:6],
+        'all_movies' : Movie.objects.all().order_by('-release_date')[1:6],
         'most_popular' : Movie.objects.all().order_by('-likes')[:10],
-        'first_movies' : Movie.objects.all().order_by('-release_date')[:1],
+        'first_movies' : Movie.objects.all().order_by('-release_date')[0],
         'this_user' : User.objects.get(id=request.session['userid'])
         }
         return render(request,"main_page.html" , context)
     else :
         context = {
-            'all_movies' : Movie.objects.all().order_by('-release_date'),
-            'most_popular' : Movie.objects.all().order_by('-likes')[:10]
+            'all_movies' : Movie.objects.all().order_by('-release_date')[1:6],
+            'most_popular' : Movie.objects.all().order_by('-likes')[:10],
+            'first_movies' : Movie.objects.all().order_by('-release_date')[0],
         }
         return render(request,"main_page.html" , context)
 
@@ -62,7 +63,6 @@ def movie(request,movie_id):
         for movie in sr:
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
-
     this_movie = Movie.objects.get(id=movie_id)
     x= this_movie.rates.all()
     sum = 0
@@ -73,13 +73,21 @@ def movie(request,movie_id):
         avg == 'no ranks yet'
     else :
         avg = sum / len(x)
-    context = {
-        'avg' : avg,
-        'this_movie' : this_movie,
-        'this_user' : User.objects.get(id=request.session['userid']),
-        'comments' : this_movie.comments.all()
-    }
-    return render(request,"movie.html",context)
+    if 'userid' in request.session:
+        context = {
+            'avg' : avg,
+            'this_movie' : this_movie,
+            'this_user' : User.objects.get(id=request.session['userid']),
+            'comments' : this_movie.comments.all()
+        }
+        return render(request,"movie.html",context)
+    else:
+        context = {
+            'avg' : avg,
+            'this_movie' : this_movie,
+            'comments' : this_movie.comments.all()
+        }
+        return render(request,"movie.html",context)
 
 def watch_list(request):
     # Autocomplete jquerry for search box 
@@ -214,7 +222,7 @@ def my_movies(request):
 def logout(request):
     del(request.session['userid'])
     del(request.session['from'])
-    return redirect('/login_form')
+    return redirect('/')
 
 def comment(request,movie_id):
     this_user=User.objects.get(id=request.session['userid'])
@@ -228,4 +236,6 @@ def about_us(request):
         context={
                 "user": this_user,
                 }
-    return render(request,'about_us.html', context)
+        return render(request,'about_us.html', context)
+    else:
+        return render(request,'about_us.html')

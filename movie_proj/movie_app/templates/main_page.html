@@ -147,27 +147,30 @@
         </div>
     </nav>
     <main>
-        <div class="main_container">
-            <div class="slid_container">
+        <div class="container-fluid">
+        <div class="main_container  row">
+            <div class="slid_container col-8">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <div class="card" style="width: 40rem; height: 28rem;">
-                                <h5 class="card-title">{{first_movies.title}} <small class="text-muted">release date :
-                                    {{first_movies.release_date}}</small></h5>
-                                {%if first_movies.uplode_image%}
-                                <img src="{{first_movies.uplode_image.url}}" class="card-img-top" alt="..."
-                                    style="height: 60%; width: 100%;">
-                                {%endif%}
-                                <div class="card-body">
-                                    <p class="card-text">{{first_movies.desc}}</p>
+                                <div class="card" style="width: 38rem; height: 28rem;">
+                                    {%if first_movies.uplode_image%}
+                                    <img src="{{first_movies.uplode_image.url}}" class="card-img-top" alt="..."
+                                        style="height: 60%; width: 100%;">
+                                    {%endif%}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{first_movies.title}} <small class="text-muted">release date :
+                                                {{first_movies.release_date}}</small></h5>
+                                        <p class="card-text" style="max-height:18%; overflow-y: scroll;">{{first_movies.desc}}
+                                        </p>
                                         <a href="/movie/{{first_movies.id}}" class="btn btn-dark">Movie details</a>
-                                </div>
+                                    </div>
+                                
                             </div>
                         </div>
                         {% for movie in all_movies%}
                         <div class="carousel-item ">
-                            <div class="card" style="width: 40rem; height: 28rem;">
+                            <div class="card" style="width: 38rem; height: 28rem;">
                                 {%if movie.uplode_image%}
                                 <img src="{{movie.uplode_image.url}}" class="card-img-top" alt="..."
                                     style="height: 60%; width: 100%;">
@@ -194,41 +197,13 @@
                         <span class="visually-hidden">Next</span>
                     </button>
                 </div>
-                <!-- Footer -->
             </div>
-            <div class="sid_bar" style="max-height: 500px; overflow-y:scroll;">
-                <div style="background-color: black; width: inherit; height: 50px;text-align: center; padding: 10px; color: white; font-size: 20px;margin-bottom: 2px; "> 
+            <div class="sid_bar col-4" style="max-height: 500px; overflow-y:scroll;">
+                <div style="background-color: black; height: 50px;text-align: center; padding: 10px; color: white; font-size: 20px;margin-bottom: 2px; "> 
                     <em>Most Popular</em>
                 </div>
-                <!-- {% for movie in all_movies%}
-                <div style="width: inherit; max-height: 300px; background-color:#ffc107">
-                    <div class="card1 mb-3" style="max-width: 540px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <div class="col-md-4">
-                                    {%if movie.uplode_image%}
-                                    <img src="{{movie.uplode_image.url}}" width="200px" height="300px" alt="...">
-                                    {%endif%}
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{movie.title}}</h5>
-                                    <p class="card-text1">
-                                        {{movie.title}}
-                                    </p>
-                                    <p class="card-text"><small class="text-muted">release date :
-                                            {{movie.release_date}}</small>
-                                    </p>
-                                    <a href="/movie/{{movie.id}}" class="btn btn-primary">Movie details</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %} -->
                 {% for movie in most_popular %}
-                <div class="card1 mb-3" style="max-width: 540px;">
+                <div class="card1 mb-3" >
                     <div class="row g-0">
                         <div class="col-md-4" style="background-color: #ffc107;">
                             {%if movie.uplode_image%}
@@ -236,7 +211,7 @@
                             {%endif%}
                         </div>
                         <div class="col-md-8" style="background-color: #ffc107;">
-                            <div class="card-body" style="max-height: 250px; overflow: auto;">
+                            <div class="card-body" style="max-height: 250px;">
                                 <h5 class="card-title">{{movie.title}}</h5>
                                 <p class="card-text" style="max-height: 100px; overflow: auto;">{{movie.desc}}</p>
                                 <p class="card-text"><small class="text-muted">{{movie.release_date}}</small></p>
@@ -247,6 +222,7 @@
                 </div>
                 {% endfor %}
             </div>
+        </div>
         </div>
         <footer class="text-center text-lg-start bg-light text-muted" style="max-height: 450px;">
             <!-- Section: Social media -->

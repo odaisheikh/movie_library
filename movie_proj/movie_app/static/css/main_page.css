@@ -19,8 +19,7 @@ header a{
     background-color: gray;
 }
 .slid_container{
-    background-color: #212529;
-    margin: 10px;
+    background-color: #212529; 
 }
 .carousel-item img{
     height: 300px;
@@ -47,24 +46,24 @@ header a{
 .card{
     position: absolute;
     right: 35%;
-    width: 40%;
+    /* width: 40%; */
     top: 10%;
     /* height: inherit; */
 }
 .main_container{
-    display: flex;
+    /* display: flex; */
     height: auto;
     /* background-image: url("../img/puddle_jumper_octodex.jpg"); */
 
 }
 .sid_bar{
-    flex: 3;
+    /* flex: 3; */
     background-image: url("static/css/Beauty_Skincare_Neutral_Website.png");
     margin-top: 10px;
     opacity: 0.88;
 }
 .slid_container{
-    flex: 6;
+    /* flex: 6; */
     height: 500px;
     opacity: 0.9;
 }

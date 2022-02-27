@@ -11,6 +11,10 @@ class MovieManager(models.Manager):
     # Title Validation
         if len(postData['title']) == 0:
             errors["title"] = "Title is required!"
+        movie = Movie.objects.filter(title = postData['title'])
+        if movie:
+            errors['title'] = "This movie already exists"
+
     # Release_date Validation
         today = datetime.date.today()
         rel_date = datetime.datetime.strptime(postData['rel_date'], "%Y-%m-%d")

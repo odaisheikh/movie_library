@@ -66,6 +66,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                {% if 'from' in request.session %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" href="/" style="color: black; font-size:16px;">Movies</a>
@@ -101,6 +102,43 @@
                     <button class="btn btn-outline-warning my-2 my-sm-0 btn-sm" type="submit"
                         style="color:black;">Search</button>
                 </form>
+                {% else %}
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/" style="color: black; font-size:16px;">Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login_form" style="color: black; font-size:16px;">Watch List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login_form" style="color: black; font-size:16px;">Favorites</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        style="color: black;font-size:16px">
+                        categories
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ms-4" href="/login_form" style="color: black; font-size:16px;">My Movies</a>
+                </li>
+            </ul>
+            <form class="d-flex" action="/movies/search" method="post">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search"
+                    name="search" id="movie_title" style="height: 30px;">
+                <button class="btn btn-outline-warning my-2 my-sm-0 btn-sm" type="submit"
+                    style="color:black;">Search</button>
+            </form>
+            {% endif %}
             </div>
         </div>
     </nav>
