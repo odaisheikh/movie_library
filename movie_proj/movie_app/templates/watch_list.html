@@ -15,22 +15,44 @@
 
 <body>
     <header>
-        <div class="container-fluid" >
-            <div class="row  head align-items-center justify-content-center px-5 py-2">
-                <div class="col-2">
-                    <img src='../static/img/project_logo1.png' class="img-fluid rounded-start" alt="...">
-                </div>
-                <div class="col-1">
-                    <a href="/" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Home</a>
-                </div>
-                <div class="col-6">
-                    <a href="/about_us" class="btn btn-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">About us</a>
-                </div>
-                <div class="col-1">
-                    <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">{{user.first_name}}</a>
-                </div>
-                <div class="col-1">
-                    <a href="/" class="btn btn-warning btn-sm" style="font-size:16px;">logout</a>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img src='../static/img/project_logo1.png' height="45" alt="movie_logo">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon" style="color: white;"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="/" class="btn outline-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about_us" class="btn outline-dark btn-sm ms-3" style="color: #ffc107; font-size:16px;">About us</a>
+                        </li>
+                    </ul>
+                    {% if 'from' in request.session %}
+                    <div class="nav-item">
+                        <a href="/adding_form" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Add Movie</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#" class="btn outline-warning btn-sm ms-3" style="color: #ffc107; font-size:16px;">{{this_user.first_name}}</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="/logout" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Log out</a>
+                    </div>
+                    {% else %}
+                    <div class="nav-item">
+                        <a href="/login_form" class="btn outline-warning btn-sm ms-3"
+                        style="color: #ffc107; font-size:16px;">Login</a>
+                    </div>
+                    <div class="nav-item">
+                        <a href="/login_form" class="btn btn-warning btn-sm" style="font-size:16px;">Sign Up</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -2,8 +2,9 @@
     margin: 0;
     padding: 0;
 }
-header{
-    background-color: #212529;
+body,html{
+    background-image: url("/static/css/Beauty_Skincare_Neutral_Website.png");
+    background-color: gray;
 }
 header a{
     width: 100px;

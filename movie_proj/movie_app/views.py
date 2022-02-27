@@ -12,6 +12,7 @@ def main(request):
         titles = []
         for movie in sr:
             titles.append(movie.title)
+            print(movie.title)
         return JsonResponse(titles, safe=False)
     if 'userid' in request.session:
         context = {
@@ -142,13 +143,18 @@ def classify(request, categ):
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
 
-    this_user = User.objects.get(id = request.session['userid'])
     this_category = Category.objects.get(name = categ)
     categ_movies = this_category.movies.all()
-    context={
+    if "userid" in request.session:
+        this_user = User.objects.get(id = request.session['userid'])
+        context={
             "user": this_user,
             "movies": categ_movies
             }
+    else:
+        context={
+                "movies": categ_movies
+                }
     return render(request, "categ_movies.html", context)
 
 def search(request):
@@ -157,20 +163,25 @@ def search(request):
     return redirect("/movies/search_result")
 
 def search_result(request):
-    this_user=User.objects.get(id= request.session['userid'])
-    result = Movie.objects.filter(title__contains = request.session["search"])
-    
+        
     if "term" in request.GET:
         sr = Movie.objects.filter(title__contains = request.GET.get('term'))
         titles = []
         for movie in sr:
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
-    print(result)
-    context={
-            "user": this_user,
-            "result": result
-            }
+    
+    result = Movie.objects.filter(title__contains = request.session["search"])
+    if "userid" in request.session:
+        this_user = User.objects.get(id = request.session['userid'])
+        context={
+                "user": this_user,
+                "result": result
+                }    
+    else:
+        context={
+                "result": result
+                }
     return render(request,"search_result.html", context)
 
 def rate(request,movie_id):
@@ -180,9 +191,6 @@ def rate(request,movie_id):
     return redirect(f'/movie/{movie_id}')
 
 def my_movies(request):
-    this_user=User.objects.get(id= request.session['userid'])
-    my_movies = this_user.added_movies.all()
-    
     # Autocomplete jquerry for search box 
     if "term" in request.GET:
         sr = Movie.objects.filter(title__contains = request.GET.get('term'))
@@ -190,12 +198,18 @@ def my_movies(request):
         for movie in sr:
             titles.append(movie.title)
         return JsonResponse(titles, safe=False)
-
-    context={
+    if "userid" in request.session:
+        this_user=User.objects.get(id= request.session['userid'])
+        my_movies = this_user.added_movies.all()
+        context={
             "user": this_user,
             "movies": my_movies
             }
-    return render(request,"my_movies.html", context)
+        return render(request,"my_movies.html", context)
+    else:
+        return redirect("/login_form")
+
+
 
 def logout(request):
     del(request.session['userid'])
@@ -209,4 +223,9 @@ def comment(request,movie_id):
     return redirect(f'/movie/{movie_id}')
 
 def about_us(request):
-    return render(request,'about_us.html')
+    if "userid" in request.session:
+        this_user = User.objects.get(id = request.session['userid'])
+        context={
+                "user": this_user,
+                }
+    return render(request,'about_us.html', context)
