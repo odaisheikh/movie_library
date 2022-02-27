@@ -39,54 +39,54 @@
             </div>
         </div>
     </header>
-    <nav>
-        <div class="container-fluid">
-            <div class="row  head align-items-center justify-content-center px-5 py-2 ">
-                <div class="col-1">
-                    <a href="/" style="color: black; font-size:18px;">Movies</a>
-                </div>
-                <div style="width: 130px;">
-                    <a href="/my_movies" style="color: black; font-size:18px;">My Movies</a>
-                </div>
-                <div class="col-1 watch">
-                    <a href="#" style="color: black; font-size:18px;">Watch List</a>
-                </div>
-                <div class="col-1">
-                    <a href="/favorite/"  style="color: black; font-size:18px;">Favorites</a>
-                </div>
-                <div class="nav-item dropdown col-3">
-                    <a class="nav-link dropdown-toggle" href="#" role="button"   data-bs-toggle="dropdown" style="color: black;font-size:16px">
-                        categories
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/category/action">Action</a></li>
-                        <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
-                        <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
-                        <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
-                        <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
-                        <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <img src='../static/img/project_logo1.png' height="30" alt="movie_logo">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <ul class="navbar-nav justify-content-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/" style="color: black; font-size:16px;">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/watch_list" style="color: black; font-size:16px;">Watch List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/favorite"  style="color: black; font-size:16px;">Favorites</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"   data-bs-toggle="dropdown" style="color: black;font-size:16px">
+                                categories
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/category/action">Action</a></li>
+                                <li><a class="dropdown-item" href="/category/drama">Drama</a></li>
+                                <li><a class="dropdown-item" href="/category/comedy">Comedy</a></li>
+                                <li><a class="dropdown-item" href="/category/romantic">Romantic</a></li>
+                                <li><a class="dropdown-item" href="/category/thriller">Thriller</a></li>
+                                <li><a class="dropdown-item" href="/category/fantasy">Fantasy</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ms-4" href="/my_movies" style="color: black; font-size:16px;">My Movies</a>
+                        </li>
                     </ul>
-                </div>
-                <div class="col-1 watch">
-                    <a href="/my_movies" style="color: black; font-size:16px;">My Movies</a>
-                </div>
-                    <form class="d-flex col-3" action="/movies/search" method="post">
+                    <form class="form-inline my-2 my-lg-0" action="/movies/search" method="post">
                         {% csrf_token %}
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" id="movie_title">
-                        <button class="btn btn-outline-warning btn-sm" type="submit" style="color:black;">Search</button>
+                        <input class="form-control mr-sm-2 mx-2" type="search" placeholder="Search" aria-label="Search" name="search" id="movie_title">
+                        <button class="btn btn-outline-warning my-2 my-sm-0 btn-sm" type="submit" style="color:black;">Search</button>
                     </form>
-            </div>
-        </div>
-    </nav>
-
+                </div>
+            </nav>
     <div class="container-fluid  mainbody">
         <div class="row align-items-center justify-content-start">
             {% for movie in movies %}
             <div class="card col-3 bg-gardient mx-3" >
                 <img  src="https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg"class="card-img-top" alt="movie_cover">
                 <div class="card-body">
-                    <h5 class="card-title">{{movie.title}}</h5>
-                    <p class="card-text overflow-auto">{{movie.desc}}</p>
+                    <h5 class="card-title" style="color: #ffc107;">{{movie.title}}</h5>
+                    <p class="card-text">{{movie.desc}}</p>
                     <a href="/movie/{{movie.id}}" class="btn btn-warning">Details</a>
                     <a href="/remove_from_watchlist/{{movie.id}}" class="btn btn-warning">Remove from Watch List</a>
                 </div>
