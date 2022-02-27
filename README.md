@@ -1,0 +1,2 @@
+ Movies library
+ The main idea of the Website is to show different kind of movies in categories and to give the visitor the ability to visit the site and for the logged in user the ability  to like, comment and rank the existing  movies ,also the user can add a movie to his watch list in order to see it later ,and the final feature is that the user can add new movies to the site but it goes through a process where the admin should accept the movie before adding it to the site.
