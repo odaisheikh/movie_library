@@ -17,5 +17,6 @@ urlpatterns = [
     path('movies/search_result', views.search_result, name="search_result"),
     path('rate/<movie_id>', views.rate),
     path('my_movies', views.my_movies),
-
+    path('logout', views.logout),
+    path('comment/<movie_id>', views.comment)
 ]
