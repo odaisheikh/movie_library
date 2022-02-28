@@ -19,6 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
+                
                 <img src='../static/img/project_logo1.png' height="45" alt="movie_logo">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -111,7 +112,9 @@
         <div class="row align-items-center justify-content-start ">
             {% for movie in movies %}
             <div class="card col-3 bg-gardient mx-3" style="height: 500px;">
-                <img  src="https://upload.wikimedia.org/wikipedia/commons/b/b5/12_Angry_Men_%281957_film_poster%29.jpg"class="card-img-top" alt="movie_cover">
+                {% if movie.uplode_image %}
+                <img  src="{{movie.uplode_image.url}}"class="card-img-top" alt="movie_cover">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{movie.title}}</h5>
                     <p class="card-text overflow-auto" style="height: 70px;">{{movie.desc}}</p>
